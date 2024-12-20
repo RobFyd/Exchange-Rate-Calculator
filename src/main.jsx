@@ -1,5 +1,5 @@
 import { ArrowDownCircle } from "lucide-react";
-import ReactDOM from "react-dom/client"; // Użycie nowego API
+import ReactDOM from "react-dom/client";
 import { useState } from "react";
 import "./index.css";
 
@@ -27,7 +27,7 @@ export default function CurrencyConverter() {
     <main className="flex min-h-screen items-center justify-center p-4 bg-gradient-to-br from-purple-900 via-black to-indigo-900">
       <div className="w-full max-w-md rounded-lg border border-purple-500/30 bg-white bg-opacity-20 backdrop-blur-lg p-6 shadow-lg">
         <h2 className="mb-6 text-center text-xl font-semibold text-cyan-100">
-          Currency Converter
+          Exchange Rate Calculator
         </h2>
 
         <div className="space-y-4">
@@ -122,5 +122,5 @@ export default function CurrencyConverter() {
 }
 
 const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement); // Tworzymy root
-root.render(<CurrencyConverter />); // Renderujemy aplikację
+const root = ReactDOM.createRoot(rootElement); // root creation
+root.render(<CurrencyConverter />); // render the app
