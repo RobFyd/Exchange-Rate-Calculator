@@ -1,5 +1,6 @@
 import { ArrowDownCircle } from "lucide-react";
 import ReactDOM from "react-dom/client"; // Użycie nowego API
+import "./index.css";
 import { useState } from "react";
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState("");
