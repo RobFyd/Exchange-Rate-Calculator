@@ -1,13 +1,14 @@
 import { ArrowDownCircle } from "lucide-react";
 import ReactDOM from "react-dom/client"; // Użycie nowego API
-import "./index.css";
 import { useState } from "react";
+import "./index.css";
+
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState("USD");
+  const [fromCurrency, setFromCurrency] = useState("USD");
+  const [toCurrency, setToCurrency] = useState("USD");
   const [result, setResult] = useState(null);
   const handleConvert = () => {
-    // Mock conversion rates
     const rates = {
       USD: 1.0,
       EUR: 0.85,
@@ -18,13 +19,14 @@ export default function CurrencyConverter() {
       CHF: 0.92,
       CNY: 6.45,
     };
-    const converted = parseFloat(amount) * rates[currency];
+    const converted =
+      (parseFloat(amount) * rates[toCurrency]) / rates[fromCurrency];
     setResult(converted.toFixed(2));
   };
   return (
-    <main className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full max-w-md rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-6 text-center text-xl font-semibold text-gray-800">
+    <main className="flex min-h-screen items-center justify-center p-4 bg-gradient-to-br from-purple-900 via-black to-indigo-900">
+      <div className="w-full max-w-md rounded-lg border border-purple-500/30 bg-white bg-opacity-20 backdrop-blur-lg p-6 shadow-lg">
+        <h2 className="mb-6 text-center text-xl font-semibold text-cyan-100">
           Currency Converter
         </h2>
 
@@ -32,16 +34,16 @@ export default function CurrencyConverter() {
           <div>
             <label
               htmlFor="amount"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              className="mb-2 block text-sm font-medium text-cyan-100"
             >
-              Amount (USD)
+              Amount
             </label>
             <input
               type="number"
               id="amount"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full rounded-md border border-gray-300 p-2.5 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-md border border-purple-500/30 bg-black/30 p-2.5 text-cyan-100 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 placeholder-cyan-300/50"
               placeholder="Enter amount"
               aria-label="Amount to convert"
             />
@@ -49,16 +51,41 @@ export default function CurrencyConverter() {
 
           <div>
             <label
-              htmlFor="currency"
-              className="mb-2 block text-sm font-medium text-gray-700"
+              htmlFor="fromCurrency"
+              className="mb-2 block text-sm font-medium text-cyan-100"
             >
-              Convert to
+              From Currency
             </label>
             <select
-              id="currency"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-              className="w-full rounded-md border border-gray-300 p-2.5 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              id="fromCurrency"
+              value={fromCurrency}
+              onChange={(e) => setFromCurrency(e.target.value)}
+              className="w-full rounded-md border border-purple-500/30 bg-black/30 p-2.5 text-cyan-100 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+              aria-label="Source currency"
+            >
+              <option value="USD">US Dollar (USD)</option>
+              <option value="EUR">Euro (EUR)</option>
+              <option value="GBP">British Pound (GBP)</option>
+              <option value="JPY">Japanese Yen (JPY)</option>
+              <option value="AUD">Australian Dollar (AUD)</option>
+              <option value="CAD">Canadian Dollar (CAD)</option>
+              <option value="CHF">Swiss Franc (CHF)</option>
+              <option value="CNY">Chinese Yuan (CNY)</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              htmlFor="toCurrency"
+              className="mb-2 block text-sm font-medium text-cyan-100"
+            >
+              To Currency
+            </label>
+            <select
+              id="toCurrency"
+              value={toCurrency}
+              onChange={(e) => setToCurrency(e.target.value)}
+              className="w-full rounded-md border border-purple-500/30 bg-black/30 p-2.5 text-cyan-100 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
               aria-label="Target currency"
             >
               <option value="USD">US Dollar (USD)</option>
@@ -74,7 +101,7 @@ export default function CurrencyConverter() {
 
           <button
             onClick={handleConvert}
-            className="flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 px-4 py-2.5 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-indigo-600 px-4 py-2.5 text-white transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2"
             aria-label="Convert currency"
           >
             <ArrowDownCircle className="h-5 w-5" />
@@ -82,9 +109,9 @@ export default function CurrencyConverter() {
           </button>
 
           {result && (
-            <div className="mt-6 text-center">
-              <p className="text-lg font-medium text-gray-900">
-                {amount} USD = {result} {currency}
+            <div className="mt-6 rounded-lg bg-black/20 p-4 text-center">
+              <p className="text-lg font-medium text-cyan-100">
+                {amount} {fromCurrency} = {result} {toCurrency}
               </p>
             </div>
           )}
