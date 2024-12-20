@@ -1,5 +1,5 @@
 // import { ArrowDownCircle } from "lucide-react";
-import { render } from "react-dom";
+import ReactDOM from "react-dom/client"; // Użycie nowego API
 import { useState } from "react";
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState("");
@@ -92,4 +92,7 @@ export default function CurrencyConverter() {
     </main>
   );
 }
-render(<CurrencyConverter />, document.getElementById("root"));
+
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement); // Tworzymy root
+root.render(<CurrencyConverter />); // Renderujemy aplikację
